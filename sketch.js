@@ -1,5 +1,5 @@
 let width = 600;
-let height = 600;
+let height = 500;
 let choco;
 let camX = 0;
 let camY = -900;
@@ -26,9 +26,9 @@ function preload() {
 }
 
 function setup() {
-  slider = createSlider(1, 30, 100);
-  slider.position(10, 10);
-  slider.style('width', '80px');
+  // slider = createSlider(0, 30, 100);
+  // slider.position(10, 10);
+  // slider.style('width', '80px');
   createCanvas(width, height, WEBGL);
   fov = PI / 6;
   escala = 5.2;
@@ -36,13 +36,15 @@ function setup() {
 
 
 function draw() {
-  camZ = slider.value() / 4 * (height / 2) / tan(fov / 2);
+  //camZ = slider.value() / 4 * (height / 2) / tan(fov / 2);
+  camZ = 13 / 4 * (height / 2) / tan(fov / 2);
   perspective(fov, width / height, camZ / 2, camZ * 10);
   camera(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
   r = map(sin(radians(frameCount)), 0, 1, 0, 180);
   g = map(cos(radians(frameCount) + PI / 3), 0, 1, 0, 40);
   b = map(sin(radians(frameCount) + PI / 7), 0, 1, 0, 50);
-  background(r, g, b, 70);
+  clear();
+  //background(r, g, b, 70);
   // orbitControl();
 
   ambientLight(255);
