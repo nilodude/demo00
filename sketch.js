@@ -53,31 +53,31 @@ function draw() {
 
 
   push(); //para aplicar la rotación a los dos elementos
-  rotateY(radians(frameCount) / 9);
+  // rotateY(radians(frameCount) / 9);
 
-  rotateX(0.15 * cos(radians(frameCount) / 2));
+  // rotateX(0.15 * cos(radians(frameCount) / 2));
 
   //portada
-  push(); {
-    translate(0, offsetY, 1); // parriba (y) 
-    texture(cover);
-    box(tam, tam, 9, 1000, 1000);
-  }
-  pop();
+  // push(); {
+  //   translate(0, offsetY, 1); // parriba (y) 
+  //   texture(cover);
+  //   box(tam, tam, 9, 1000, 1000);
+  // }
+  // pop();
 
   // dentroFuera = keyIsPressed && keyCode === SHIFT ? 0.7 * (mouseY - height) : dentroFuera;
-  limitao = Math.min(Math.max(-0.75 * (mouseY - height), 0), height);
+  limitao = Math.min(Math.max(-0.95 * (mouseY - height), 0), height);
   dentroFuera = limitao;
   //disco
   push(); {
     push(); { //vinilo
       translate(dentroFuera, offsetY, -1.125);
       fill(0);
-      rotateX(PI / 2);
-      cylinder(tam / 2, 4, 1000, 1000);
-      // rotateY(PI / 2);
-      // scale(escala);
-      // model(discoM);
+      // rotateX(PI / 2);
+      // cylinder(tam / 2, 4, 1000, 1000);
+      rotateY(PI / 2);
+      scale(escala);
+      model(discoM);
     }
     pop();
     galletaSize = tam / 2.5;
@@ -105,12 +105,12 @@ function draw() {
   //contraportada
   push();
   translate(0, offsetY, -9); //idem + padentro (z)
-  rotateY(PI);
-  // rotateY(PI / 2);
+  // rotateY(PI);
+  rotateY(PI / 2);
   texture(back);
-  box(tam, tam, 9, 1000, 1000);
-  // scale(escala);
-  // model(coverM);
+  // box(tam, tam, 9, 1000, 1000);
+  scale(escala);
+  model(coverM);
   pop();
   pop();
 
