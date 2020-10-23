@@ -11,7 +11,7 @@ let dentroFuera = 0;
 let limitao = 0;
 let firstDraw = false;
 const tam = 800;
-const offsetY = -120;
+const offsetY = -10;
 let fov = 0;
 let coverM;
 let discoM;
@@ -43,13 +43,13 @@ function draw() {
   //camZ = slider.value() / 4 * (height / 2) / tan(fov / 2);
 
 
-  r = map(cos(radians(frameCount / random(1, 8))), 0, 1, 100, 180);
-  g = map(cos(radians(frameCount / random(1, 7)) + PI / 7.1), 0, 1, 50, 140);
-  b = map(cos(radians(frameCount / random(1, 9)) + PI / 7), 0, 1, 50, 150);
+  r = map(sin(radians(frameCount)), 0, 1, 0, 180);
+  g = map(cos(radians(frameCount) + PI / 3), 0, 1, 0, 40);
+  b = map(sin(radians(frameCount) + PI / 7), 0, 1, 0, 50);
   clear();
-  background(r, g, b, 70);
+  //background(r, g, b, 70);
   // orbitControl();
-  ambientLight(r, g, b);
+  ambientLight(255);
   pointLight(10, 20, 20, -10000, 10000, 0);
   noStroke();
 
@@ -67,12 +67,17 @@ function draw() {
   pop();
 
   // dentroFuera = keyIsPressed && keyCode === SHIFT ? 0.7 * (mouseY - height) : dentroFuera;
-  limitao = Math.min(Math.max(-0.95 * (mouseY - height), 0), height);
+  // limitao = Math.min(Math.max(-0.95 * (mouseY - height), 0), height);
+  limitao = map(mouseY, 0, height, -tam + height / 2, height / 2);
+
   dentroFuera = limitao;
+
+  console.log(4 * offsetY - dentroFuera);
   //disco
   push(); {
+    offsetDisco = Math.min(4 * offsetY - dentroFuera, offsetY);
     push(); { //vinilo
-      translate(0, offsetY - dentroFuera, -1.125);
+      translate(0, offsetDisco, -1.125);
       fill(0);
       // rotateX(PI / 2);
       // cylinder(tam / 2, 4, 1000, 1000);
@@ -83,7 +88,7 @@ function draw() {
     pop();
     galletaSize = tam / 2.5;
     push(); { //galleta A
-      translate(0, offsetY - dentroFuera, 2.9);
+      translate(0, offsetDisco, 2.9);
       fill(250, 250, 255);
       ellipse(0, 0, galletaSize);
       // fill(r, g, b, 70);
@@ -93,7 +98,7 @@ function draw() {
     pop();
 
     push(); { //galleta B
-      translate(0, offsetY - dentroFuera, -5);
+      translate(0, offsetDisco, -5);
       fill(50, 50, 55);
       ellipse(0, 0, galletaSize);
       // fill(r, g, b, 70);
@@ -122,7 +127,7 @@ function draw() {
   rotateX(-0.05 * cos(radians(frameCount) / 2));
   rotateY(0.05 * sin(radians(frameCount) / 2));
 
-  translate(0, 500);
+  translate(0, offsetY + 650);
   rotateX(PI / 2);
   texture(logoBazofia);
   plane(logoBazofia.width / 1.2, logoBazofia.height / 1.2)
