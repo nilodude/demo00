@@ -29,25 +29,30 @@ function setup() {
   // slider = createSlider(0, 30, 100);
   // slider.position(10, 10);
   // slider.style('width', '80px');
-  createCanvas(width, height, WEBGL);
+  var cnv = createCanvas(width, height, WEBGL);
   fov = PI / 6;
   escala = 4;
   camZ = 13 / 4 * (height / 2) / tan(fov / 2);
   perspective(fov, width / height, camZ / 2, camZ * 10);
   camera(camX, camY, camZ, posX, posY, posZ, 0, 1, 0);
-
+  var x = (windowWidth - width) / 2;
+  var y = (windowHeight - height) / 2;
+  cnv.position(x, y);
 }
 
 
 function draw() {
   //camZ = slider.value() / 4 * (height / 2) / tan(fov / 2);
 
-
+  let dirX = (mouseX / width - 0.5) * 2;
+  let dirY = (mouseY / height - 0.5) * 2;
+  // pointLight(50, 70, 70, dirX, dirY, 100);
+  directionalLight(250, 250, 250, -dirX, -dirY, -1);
   r = map(sin(radians(frameCount)), 0, 1, 0, 180);
   g = map(cos(radians(frameCount) + PI / 3), 0, 1, 0, 40);
   b = map(sin(radians(frameCount) + PI / 7), 0, 1, 0, 50);
   clear();
-  //background(r, g, b, 70);
+  background(0, 0, 0);
   // orbitControl();
   ambientLight(255);
   pointLight(10, 20, 20, -10000, 10000, 0);
@@ -72,13 +77,12 @@ function draw() {
 
   dentroFuera = limitao;
 
-  console.log(4 * offsetY - dentroFuera);
   //disco
   push(); {
     offsetDisco = Math.min(4 * offsetY - dentroFuera, offsetY);
     push(); { //vinilo
       translate(0, offsetDisco, -1.125);
-      fill(0);
+      fill(20);
       // rotateX(PI / 2);
       // cylinder(tam / 2, 4, 1000, 1000);
       rotateY(PI / 2);
