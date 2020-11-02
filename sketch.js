@@ -52,8 +52,9 @@ function draw() {
   g = map(cos(radians(frameCount) + PI / 3), 0, 1, 0, 40);
   b = map(sin(radians(frameCount) + PI / 7), 0, 1, 0, 50);
   clear();
-  background(0, 0, 0);
-  // orbitControl();
+  // background(0, 0, 0);
+  background(255);
+  orbitControl();
   ambientLight(255);
   pointLight(10, 20, 20, -10000, 10000, 0);
   noStroke();
@@ -79,7 +80,7 @@ function draw() {
 
   //disco
   push(); {
-    offsetDisco = Math.min(4 * offsetY - dentroFuera, offsetY);
+    offsetDisco = Math.min(10 * offsetY - dentroFuera, offsetY);
     push(); { //vinilo
       translate(0, offsetDisco, -1.125);
       fill(20);
@@ -103,7 +104,7 @@ function draw() {
 
     push(); { //galleta B
       translate(0, offsetDisco, -5);
-      fill(50, 50, 55);
+      fill(250, 250, 255);
       ellipse(0, 0, galletaSize);
       // fill(r, g, b, 70);
       // translate(0, 0, -0.1);
@@ -127,13 +128,25 @@ function draw() {
   pop();
 
   //suelo
-  push();
-  rotateX(-0.05 * cos(radians(frameCount) / 2));
-  rotateY(0.05 * sin(radians(frameCount) / 2));
+  push(); {
+    rotateX(-0.05 * cos(radians(frameCount) / 2));
+    rotateY(0.05 * sin(radians(frameCount) / 2));
 
-  translate(0, offsetY + 650);
-  rotateX(PI / 2);
-  texture(logoBazofia);
-  plane(logoBazofia.width / 1.2, logoBazofia.height / 1.2)
+    translate(0, offsetY + 650);
+    rotateX(PI / 2);
+    fill('rgba(0,0,0,0');
+    texture(logoBazofia);
+    plane(logoBazofia.width / 1.2, logoBazofia.height / 1.2)
+  }
   pop();
+
+  // push(); {//habitacion
+  //   stroke('rgba(0,255,0,0.25)');
+  //   strokeWeight(4);
+  //   fill('rgba(0,255,0, 0.25)');
+  //   translate(0, offsetY + 950, 0);
+  //   rotateX(PI / 2);
+  //   box(2500, 9000, 1);
+  // }
+  // pop();
 }
