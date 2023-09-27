@@ -30,7 +30,7 @@ function setup() {
   // slider.position(10, 10);
   // slider.style('width', '80px');
   var cnv = createCanvas(width, height, WEBGL);
-  fov = PI / 6;
+  fov = PI / 2;
   escala = 4;
   camZ = 13 / 4 * (height / 2) / tan(fov / 2);
   perspective(fov, width / height, camZ / 2, camZ * 10);
@@ -68,7 +68,7 @@ function draw() {
   push(); {
     translate(0, offsetY, 2.4); // parriba (y) 
     texture(cover);
-    box(tam, tam, 9, 1000, 1000);
+    box(tam, tam, 9, 10, 10);
   }
   pop();
 
@@ -120,7 +120,7 @@ function draw() {
     rotateY(PI);
     // rotateY(PI / 2);
     texture(back);
-    box(tam, tam, 9, 1000, 1000);
+    box(tam, tam, 9, 10, 10);
     // scale(escala);
     // model(coverM);
   }
@@ -129,8 +129,8 @@ function draw() {
 
   //suelo
   push(); {
-    rotateX(-0.05 * cos(radians(frameCount) / 2));
-    rotateY(0.05 * sin(radians(frameCount) / 2));
+    rotateX(-0.5 * cos(radians(frameCount) / 2));
+    rotateY(0.5 * sin(radians(frameCount) / 2));
 
     translate(0, offsetY + 650);
     rotateX(PI / 2);
